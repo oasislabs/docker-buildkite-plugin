@@ -39,6 +39,8 @@ configuration:
       type: boolean
     privileged:
       type: boolean
+    unconfined:
+      type: boolean
   required:
     - image
   additionalProperties: false
