@@ -220,6 +220,9 @@ if [[ -n "${BUILDKITE_PLUGIN_DOCKER_ENTRYPOINT:-}" ]] ; then
   shell_disabled=1
 fi
 
+# Set container name based on job id
+args+=("--name" "build-${BUILDKITE_JOB_ID:-}")
+
 # Handle shell being disabled
 if [[ "${BUILDKITE_PLUGIN_DOCKER_SHELL:-}" =~ ^(false|off|0)$ ]] ; then
   shell_disabled=1

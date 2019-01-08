@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -euo pipefail
+
+container_name="build-${BUILDKITE_JOB_ID:-}"
+
+echo "--- :docker: Cleaning up container ${container_name}"
+
+# Ignore errors as this could fail if the container has exited successfully
+# and has already been removed.
+docker rm -f ${container_name} 2>/dev/null || true
