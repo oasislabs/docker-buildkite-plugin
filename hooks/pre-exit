@@ -1,0 +1,9 @@
+#!/bin/bash
+
+set -euo pipefail
+
+container_name="build-${BUILDKITE_BUILD_ID:-}"
+
+echo "--- :docker: Cleaning up container ${container_name}"
+
+docker rm -f ${container_name}
