@@ -344,7 +344,12 @@ if [[ -n "${BUILDKITE_COMMAND}" ]] ; then
     args+=("${windows_multi_command}")
     display_command+=("'${windows_multi_command}'")
   else
-    args+=("${BUILDKITE_COMMAND}")
+    if [[ -n "${BUILDKITE_PLUGIN_DOCKER_ENTRYPOINT:-}" ]] ; then
+      # If entrypoint is specified, need to use '-c' with command
+      args+=("-c" "${BUILDKITE_COMMAND}")
+    else
+      args+=("${BUILDKITE_COMMAND}")
+    fi
     display_command+=("'${BUILDKITE_COMMAND}'")
   fi
 elif [[ ${#command[@]} -gt 0 ]] ; then
