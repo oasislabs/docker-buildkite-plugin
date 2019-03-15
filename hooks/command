@@ -143,6 +143,13 @@ if plugin_read_list_into_result BUILDKITE_PLUGIN_DOCKER_VOLUMES BUILDKITE_PLUGIN
   done
 fi
 
+# Parse devices and add them to the docker args
+if plugin_read_list_into_result BUILDKITE_PLUGIN_DOCKER_DEVICES ; then
+  for arg in "${result[@]}" ; do
+    args+=( "--device" "${arg}" )
+  done
+fi
+
 # Set workdir if one is provided or if the checkout is mounted
 if [[ -n "${workdir:-}" ]] || [[ "${BUILDKITE_PLUGIN_DOCKER_MOUNT_CHECKOUT:-on}" =~ ^(true|on|1)$ ]]; then
   args+=("--workdir" "${workdir}")

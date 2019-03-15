@@ -13,6 +13,8 @@ configuration:
       type: array
     debug:
       type: boolean
+    device:
+      type: array
     entrypoint:
       type: string
     environment:
